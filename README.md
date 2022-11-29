@@ -1,3 +1,5 @@
 # Centos8streamupgradeto9
 
-You might need to reset the modules using dnf module reset *modulename*
+A script to upgrade centos 8 stream to 9 stream.
+
+Quite unstable and very janky. Not to be used in a production enviroment
