@@ -8,3 +8,4 @@ rm -f /boot/vmlinuz-0-rescue-b2a198ecbfdd451cb905f76f825af01e /boot/initramfs-0-
 nf module reset -y nodejs perl perl-IO-Socket-SSL perl-libwww-perl php satellite-5-client virt
 firewall-cmd --permanent --zone=public --add-forward
 firewall-cmd --reload
+dnf update -y --allowerasing
