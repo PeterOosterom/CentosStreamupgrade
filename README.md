@@ -1,4 +1,4 @@
-# Centos8streamupgradeto9
+# CentosStreamupgrade
 
 A script to upgrade centos 8 stream to 9 stream.
 
