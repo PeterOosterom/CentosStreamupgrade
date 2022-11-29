@@ -1,2 +1,3 @@
 # Centos8streamupgradeto9
-A repo to easily upgrade stream 8 to stream 9
+
+You might need to reset the modules using dnf module reset *modulename*
