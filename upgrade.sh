@@ -13,8 +13,8 @@ yum update dnf module disable python36 python39 perl perl-IO-Socket-SSL perl-lib
 rpm -e `rpm -q kernel`
 dnf -y --releasever=9 --allowerasing --setopt=deltarpm=false distro-sync swap python39-setuptools python3-setuptools
 dnf clean all
-rm -f /var/lib/rpm/__db*
-rpm --rebuilddb
+restorecon -Rv /var/lib/rpm
+rpmdb --rebuilddb
 dnf clean all
 dnf -y groupupdate "Core" "Minimal Install"
 reboot
