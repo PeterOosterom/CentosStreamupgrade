@@ -1,6 +1,5 @@
 yum upgrade
 dnf update -y
-dnf install epel-release
 dnf install rpmconf
 dnf install yum-utils
 rpmconf -a  # answer "n" to both things
