@@ -13,4 +13,5 @@ rpm -e `rpm -q kernel`
 rpm -e --nodeps sysvinit-tools
 #now upgrade centos8 to stream 8
 dnf -y install centos-release-stream
-dnf swap centos-{linux,stream}-repos
+dnf swap centos-linux-repos centos-stream-repos
+dnf distro-sync
