@@ -7,16 +7,19 @@ dnf update -y
 dnf -y groupupdate "Core" "Minimal Install"
 rm -f /boot/vmlinuz-0-rescue-b2a198ecbfdd451cb905f76f825af01e /boot/initramfs-0-rescue-b2a198ecbfdd451cb905f76f825af01e.img /boot/loader/entries/b2a198ecbfdd451cb905f76f825af01e-0-rescue.conf
 /usr/lib/kernel/install.d/51-dracut-rescue.install add $(uname -r) /boot /boot/vmlinuz-$(uname -r)
+
+cd /etc/sysconfig/network-scripts/
+mv ifcfg-eth0 ifcfg-enX0
+sed -i 's/eth0/enX0/' ifcfg-enX0
+
+
+rebot
 rpm -q kernel-core
 dnf remove -y kernel-core-4.18.0-383.el8.x86_64 kernel-core-4.18.0-408.el8.x86_64 kernel-core-4.18.0-394.el8.x86_64 kernel-devel-0:4.18.0-394.el8.x86_64
 
 
 
 dnf module reset -y nodejs perl perl-IO-Socket-SSL perl-libwww-perl php virt httpd python36
-
-cd /etc/sysconfig/network-scripts/
-mv ifcfg-eth0 ifcfg-enX0
-sed -i 's/eth0/enX0/' ifcfg-enX0
 
 dnf list --installed|grep el8
 
