@@ -8,7 +8,9 @@ dnf -y groupupdate "Core" "Minimal Install"
 rm -f /boot/vmlinuz-0-rescue-b2a198ecbfdd451cb905f76f825af01e /boot/initramfs-0-rescue-b2a198ecbfdd451cb905f76f825af01e.img /boot/loader/entries/b2a198ecbfdd451cb905f76f825af01e-0-rescue.conf
 /usr/lib/kernel/install.d/51-dracut-rescue.install add $(uname -r) /boot /boot/vmlinuz-$(uname -r)
 rpm -q kernel-core
-dnf remove -y kernel-core-4.18.0-383.el8.x86_64 kernel-core-4.18.0-408.el8.x86_64 kernel-core-4.18.0-394.el8.x86_64
+dnf remove -y kernel-core-4.18.0-383.el8.x86_64 kernel-core-4.18.0-408.el8.x86_64 kernel-core-4.18.0-394.el8.x86_64 kernel-devel-0:4.18.0-394.el8.x86_64
+
+
 
 dnf module reset -y nodejs perl perl-IO-Socket-SSL perl-libwww-perl php virt httpd python36
 
@@ -17,5 +19,11 @@ mv ifcfg-eth0 ifcfg-enX0
 sed -i 's/eth0/enX0/' ifcfg-enX0
 
 dnf list --installed|grep el8
+dnf remove -y inih-56-1.el8 iwl6000-firmware
+dnf install -y inih
+
+wget https://dl.rockylinux.org/pub/rocky/9/AppStream/aarch64/os/Packages/m/man-pages-overrides-9.0.0.0-1.el9.noarch.rpm
+yum localinstall man-pages-overrides-9.0.0.0-1.el9.noarch.rpm
+
 cat /etc/*release
 
