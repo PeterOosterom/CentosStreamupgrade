@@ -19,7 +19,7 @@ dnf remove -y kernel-core-4.18.0-383.el8.x86_64 kernel-core-4.18.0-408.el8.x86_6
 
 
 
-dnf module reset -y nodejs perl perl-IO-Socket-SSL perl-libwww-perl php virt httpd python36
+dnf module reset -y nodejs perl perl-IO-Socket-SSL perl-libwww-perl php httpd python36
 
 dnf list --installed|grep el8
 
