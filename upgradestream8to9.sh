@@ -13,7 +13,7 @@ mv ifcfg-eth0 ifcfg-enX0
 sed -i 's/eth0/enX0/' ifcfg-enX0
 
 
-rebot
+reboot
 rpm -q kernel-core
 dnf remove -y kernel-core-4.18.0-383.el8.x86_64 kernel-core-4.18.0-408.el8.x86_64 kernel-core-4.18.0-394.el8.x86_64 kernel-devel-0:4.18.0-394.el8.x86_64
 
