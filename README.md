@@ -1,7 +1,5 @@
 # CentosStreamupgrade
 
-# upgrade centos 7 to stream 8.
-
 # upgrade stream 8 to 9
 
 git clone https://github.com/PeterOosterom/CentosStreamupgrade
@@ -15,3 +13,5 @@ chmod +x upgradestream8to9.sh
 # Warning
 
 Quite unstable and very janky. Not to be used in a production enviroment
+
+Removed the upgrade from 7 to 8 cause jankyness
