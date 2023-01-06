@@ -13,3 +13,5 @@ chmod +x upgradestream8to9.sh
 # Warning
 
 Quite unstable and very janky. Not to be used in a production enviroment
+
+Sucky sucky
