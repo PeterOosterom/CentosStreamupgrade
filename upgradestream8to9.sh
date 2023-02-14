@@ -1,3 +1,8 @@
+#first dump the database
+su - postgres
+pg_dumpall > dump_pg12.out
+
+#update machine to centos 9
 dnf update -y --allowerasing
 dnf install -y http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-repos-9.0-18.el9.noarch.rpm http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-release-9.0-18.el9.noarch.rpm http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-9.0-18.el9.noarch.rpm
 dnf -y --releasever=9-stream --allowerasing --setopt=deltarpm=false distro-sync
@@ -34,5 +39,12 @@ wget https://kojihub.stream.centos.org/kojifiles/packages/xorg-x11-font-utils/7.
 
 
 yum localinstall -y man-pages-overrides-9.0.0.0-1.el9.noarch.rpm libfido2-1.6.0-7.el9.x86_64.rpm libcbor-0.7.0-5.el9.x86_64.rpm javapackages-filesystem-6.0.0-3.el9.noarch.rpm xorg-x11-font-utils-7.5-53.el9.x86_64.rpm
-cat /etc/*release
+dnf install https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+dnf install postgresql13 postgresql13-server
+/usr/pgsql-13/bin/postgresql-13-setup initdb
+
+#copy dump to new server
+su - postgres
+psql -f dump_pg12.out postgres
+
 
