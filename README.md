@@ -10,6 +10,8 @@ chmod +x upgradestream8to9.sh
 
 ./upgradestream8to9.sh
 
+In a second window run tail -f /var/log/messages
+
 # Warning
 
 Quite unstable and very janky. Not to be used in a production enviroment
