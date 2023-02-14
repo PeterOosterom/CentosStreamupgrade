@@ -2,6 +2,10 @@
 su - postgres
 pg_dumpall > dump_pg12.out
 
+#remove the old postgres install
+yum list installed | grep post
+yum remove postgresql12.x86_64 postgresql12-contrib.x86_64 postgresql12-libs.x86_64 postgresql12-server.x86_64
+
 #update machine to centos 9
 dnf update -y --allowerasing
 dnf install -y http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-repos-9.0-18.el9.noarch.rpm http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-release-9.0-18.el9.noarch.rpm http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-9.0-18.el9.noarch.rpm
