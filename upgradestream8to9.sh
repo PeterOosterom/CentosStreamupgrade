@@ -48,7 +48,7 @@ dnf install https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/p
 dnf install postgresql13 postgresql13-server
 /usr/pgsql-13/bin/postgresql-13-setup initdb
 
-#copy dump to new server
+#copy dump to new server doet dit wel ff in screen
 su - postgres
 psql -f dump_pg12.out postgres
 
