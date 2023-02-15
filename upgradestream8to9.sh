@@ -5,7 +5,7 @@ pg_dumpall > dump_pg12.out
 #remove the old postgres install
 sudo su -
 yum list installed | grep post
-yum remove postgresql12.x86_64 postgresql12-contrib.x86_64 postgresql12-libs.x86_64 postgresql12-server.x86_64
+yum remove postgresql12*
 
 #update machine to centos 9
 dnf update -y --allowerasing
