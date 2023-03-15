@@ -53,4 +53,14 @@ systemctl start postgres13.service
 su - postgres
 psql -f dump_pg12.out postgres
 
+dnf -qy module disable postgresql
+dnf install -y postgresql15-server
+/usr/pgsql-15/bin/postgresql-15-setup initdb
+su - postgres
 
+/usr/pgsql-15/bin/pg_upgrade \
+  --old-datadir=/var/lib/pgsql/13/data \
+  --new-datadir=/var/lib/pgsql/15/data \
+  --old-bindir=/usr/pgsql-13/bin/ \
+  --new-bindir=/usr/pgsql-15/bin/ \
+  --check
