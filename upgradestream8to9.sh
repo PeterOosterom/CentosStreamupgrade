@@ -52,7 +52,7 @@ systemctl start postgres13.service
 #copy dump to new server doet dit wel ff in screen
 su - postgres
 psql -f dump_pg12.out postgres
-
+ systemctl stop postgresql-13.service
 dnf -qy module disable postgresql
 dnf install -y postgresql15-server
 /usr/pgsql-15/bin/postgresql-15-setup initdb
