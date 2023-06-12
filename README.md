@@ -2,6 +2,8 @@
 
 # upgrade stream 8 to 9
 
+yum install git
+
 git clone https://github.com/PeterOosterom/CentosStreamupgrade
 
 cd CentosStreamupgrade
