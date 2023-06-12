@@ -1,12 +1,3 @@
-#first dump the database
-su - postgres
-pg_dumpall > dump_pg12.out
-
-#remove the old postgres install
-sudo su -
-yum list installed | grep post
-yum remove postgresql12* 
-
 #update machine to centos 9
 dnf update -y --allowerasing
 dnf install -y http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-repos-9.0-18.el9.noarch.rpm http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-release-9.0-18.el9.noarch.rpm http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-9.0-18.el9.noarch.rpm
@@ -44,23 +35,3 @@ wget https://kojihub.stream.centos.org/kojifiles/packages/xorg-x11-font-utils/7.
 
 
 yum localinstall -y man-pages-overrides-9.0.0.0-1.el9.noarch.rpm libfido2-1.6.0-7.el9.x86_64.rpm libcbor-0.7.0-5.el9.x86_64.rpm javapackages-filesystem-6.0.0-3.el9.noarch.rpm xorg-x11-font-utils-7.5-53.el9.x86_64.rpm
-dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-dnf install -y postgresql13 postgresql13-server
-/usr/pgsql-13/bin/postgresql-13-setup initdb
-
-systemctl start postgres13.service
-#copy dump to new server doet dit wel ff in screen
-su - postgres
-psql -f dump_pg12.out postgres
- systemctl stop postgresql-13.service
-dnf -qy module disable postgresql
-dnf install -y postgresql15-server
-/usr/pgsql-15/bin/postgresql-15-setup initdb
-su - postgres
-
-/usr/pgsql-15/bin/pg_upgrade \
-  --old-datadir=/var/lib/pgsql/13/data \
-  --new-datadir=/var/lib/pgsql/15/data \
-  --old-bindir=/usr/pgsql-13/bin/ \
-  --new-bindir=/usr/pgsql-15/bin/ \
-  --check
