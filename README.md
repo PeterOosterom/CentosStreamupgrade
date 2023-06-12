@@ -2,7 +2,7 @@
 
 # upgrade stream 8 to 9
 
-yum install git
+yum install git -y
 
 git clone https://github.com/PeterOosterom/CentosStreamupgrade
 
