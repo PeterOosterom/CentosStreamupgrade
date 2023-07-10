@@ -2,6 +2,7 @@
 dnf update -y --allowerasing
 dnf install -y http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-repos-9.0-18.el9.noarch.rpm http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-release-9.0-18.el9.noarch.rpm http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-9.0-18.el9.noarch.rpm
 dnf -y --releasever=9-stream --allowerasing --setopt=deltarpm=false distro-sync
+rpm -e subscription-manager
 rpmdb --rebuilddb
 dnf clean packages
 dnf update -y
