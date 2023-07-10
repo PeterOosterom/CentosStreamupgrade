@@ -26,7 +26,7 @@ dnf module reset -y nodejs perl perl-IO-Socket-SSL perl-libwww-perl php httpd py
 dnf list --installed|grep el8
 
 dnf remove -y inih-56-1.el8 iwl6000-firmware
-dnf install -y inih
+dnf install -y inih wget
 
 wget https://dl.rockylinux.org/pub/rocky/9/AppStream/x86_64/os/Packages/m/man-pages-overrides-9.0.0.0-1.el9.noarch.rpm 
 wget http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/libfido2-1.6.0-7.el9.x86_64.rpm
