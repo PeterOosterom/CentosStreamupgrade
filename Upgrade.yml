@@ -21,21 +21,46 @@
           state: latest
           update_cache: yes
          #cache_valid_time: 3600
-
+         
+      - name: Reboot host and wait for it to restart
+        reboot:
+          msg: "Reboot initiated by Ansible"
+          connect_timeout: 5
+          reboot_timeout: 600
+          pre_reboot_delay: 0
+          post_reboot_delay: 30
+          test_command: whoami
+          
       - name: clean yum
         command: /bin/yum clean all 
         args:
           warn: false
 
-      - name: Install DNF, ELevate, leapp
+      - name: Install DNF
         yum:
-          name: 
-            - dnf
-            - "http://repo.almalinux.org/elevate/elevate-release-latest-el7.noarch.rpm"
-            - leapp-upgrade
-            - leapp-data-centos
-            - yum-utils
+          name: dnf
           state: present
+
+      - name: ensure ELevate
+        yum:
+          name: "http://repo.almalinux.org/elevate/elevate-release-latest-el7.noarch.rpm"
+          state: present
+
+      - name: ensure leapp-upgrade
+        yum:
+          name: leapp-upgrade
+          state: present
+
+      - name: ensure leapp-data-centos
+        yum:
+          name: leapp-data-centos
+          state: present
+          
+      - name: ensure yum-utils
+        yum:
+          name: yum-utils
+          state: present
+
 
       - name: Remove old kernels
         command: package-cleanup -y --oldkernels --count=1
@@ -49,7 +74,7 @@
           - /var/log/leapp/leapp-report.json
 
       - name: Generate leapp preupgrade report
-        command: leapp preupgrade >/dev/null 2>&1
+        command: leapp preupgrade
         args:
           creates: /var/log/leapp/leapp-report.txt
         ignore_errors: yes
@@ -85,3 +110,13 @@
 
       - name: Upgrade
         command: leapp upgrade
+
+      - name: Reboot host and wait for it to restart
+        reboot:
+          msg: "Reboot initiated by Ansible"
+          connect_timeout: 5
+          reboot_timeout: 600
+          pre_reboot_delay: 0
+          post_reboot_delay: 30
+          test_command: whoami
+          
