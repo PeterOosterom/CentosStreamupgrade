@@ -1,6 +1,6 @@
 ---
   - name: Centos upgrade
-    hosts: localhost
+    hosts: test
     become: yes
     become_user: root
     tasks:
