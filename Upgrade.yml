@@ -1,0 +1,87 @@
+---
+  - name: Centos upgrade
+    hosts: localhost
+    become: yes
+    become_user: root
+    tasks:
+
+      - name: ensure apache is at the latest version
+        yum:
+          name: httpd
+          state: latest
+
+      - name: ensure apache is running
+        service:
+          name: httpd
+          state: started
+
+      - name: Install system updates for centos systems
+        yum:
+          name: '*'
+          state: latest
+          update_cache: yes
+         #cache_valid_time: 3600
+
+      - name: clean yum
+        command: /bin/yum clean all 
+        args:
+          warn: false
+
+      - name: Install DNF, ELevate, leapp
+        yum:
+          name: 
+            - dnf
+            - "http://repo.almalinux.org/elevate/elevate-release-latest-el7.noarch.rpm"
+            - leapp-upgrade
+            - leapp-data-centos
+            - yum-utils
+          state: present
+
+      - name: Remove old kernels
+        command: package-cleanup -y --oldkernels --count=1
+
+      - name: Cleanup previous preupgrade reports
+        file:
+          path: '{{ item }}'
+          state: absent
+        loop:
+          - /var/log/leapp/leapp-report.txt
+          - /var/log/leapp/leapp-report.json
+
+      - name: Generate leapp preupgrade report
+        command: leapp preupgrade >/dev/null 2>&1
+        args:
+          creates: /var/log/leapp/leapp-report.txt
+        ignore_errors: yes
+        register: leapp_preupgrade
+
+      - name: Debug leapp preupgrade output
+        debug:
+          var: leapp_preupgrade
+          verbosity: 2
+
+      - name: Change answer file
+        command: leapp answer --section remove_pam_pkcs11_module_check.confirm=True
+
+      - name: Cleanup previous preupgrade reports
+        file:
+          path: '{{ item }}'
+          state: absent
+        loop:
+          - /var/log/leapp/leapp-report.txt
+          - /var/log/leapp/leapp-report.json
+
+      - name: Generate leapp preupgrade report
+        command: leapp preupgrade
+        args:
+          creates: /var/log/leapp/leapp-report.txt
+        ignore_errors: yes
+        register: leapp_preupgrade
+
+      - name: Debug leapp preupgrade output
+        debug:
+          var: leapp_preupgrade
+          verbosity: 2
+
+      - name: Upgrade
+        command: leapp upgrade
