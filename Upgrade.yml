@@ -128,13 +128,6 @@
           post_reboot_delay: 30
           test_command: whoami
 
-      - name: Install system updates for centos systems
-        yum:
-          name: '*'
-          state: latest
-          update_cache: yes
-         #cache_valid_time: 3600
-
       - name: ensure postgres repo
         command: dnf -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
         args:
