@@ -5,6 +5,9 @@
     become_user: root
     tasks:
 
+
+#Update apache en centos zodat alle servers dezelfde versie hebben
+
       - name: ensure apache is at the latest version
         yum:
           name: httpd
@@ -21,7 +24,10 @@
           state: latest
           update_cache: yes
          #cache_valid_time: 3600
-         
+
+
+#reboot zodat eventuele nieuwe kernels gebruikt worden
+
       - name: Reboot host and wait for it to restart
         reboot:
           msg: "Reboot initiated by Ansible"
@@ -41,6 +47,8 @@
           name: dnf
           state: present
 
+
+#installeer de benodigdeheden voor Elevate
       - name: ensure ELevate
         yum:
           name: "http://repo.almalinux.org/elevate/elevate-release-latest-el7.noarch.rpm"
