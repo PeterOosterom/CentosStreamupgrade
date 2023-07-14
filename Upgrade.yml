@@ -126,4 +126,44 @@
           state: latest
           update_cache: yes
          #cache_valid_time: 3600
-         
+
+      - name: ensure postgres repo
+        yum:
+          name: "https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
+          state: present
+
+
+      - name: disable default postgres repo
+        command: dnf module -y disable postgresql
+        args:
+          warn: false
+          
+      - name: clean yum
+        command: /bin/yum clean all 
+        args:
+          warn: false
+
+      - name: ensure postgresql15-server
+        yum:
+          name: postgresql15-server
+          state: present
+
+      - name: Enable postgres service
+        systemd:
+          name: postgresql15-server
+          enabled: true
+          masked: no
+          state: present
+
+      - name: ensure apache is at the latest version
+        yum:
+          name: httpd
+          state: latest
+
+      - name: ensure apache is running
+        systemd:
+          name: httpd
+          state: started
+          enabled: true
+          masked: no
+
