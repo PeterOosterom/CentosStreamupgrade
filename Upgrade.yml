@@ -150,7 +150,7 @@
 
       - name: Enable postgres service
         systemd:
-          name: postgresql15-server
+          name: postgresql-15.service
           enabled: true
           masked: no
           state: started
