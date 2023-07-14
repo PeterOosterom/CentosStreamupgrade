@@ -154,7 +154,7 @@
         register: postgres_data
 
       - name: "Initialize PostgreSQL"
-        shell: "postgresql-setup initdb"
+        shell: "/usr/pgsql-15/bin/postgresql-15-setup initdb"
         when: not postgres_data.stat.exists
 
       
