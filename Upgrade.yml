@@ -148,14 +148,14 @@
           name: postgresql15-server
           state: present
 
-      - name: "Find out if PostgreSQL is initialized"
-        ansible.builtin.stat:
-          path: "/var/lib/pgsql/data/pg_hba.conf"
-        register: postgres_data
+      - name: Check if PostgreSQL database is initialized.
+        stat:
+          path: "{{ postgresql_data_dir }}/PG_VERSION"
+        register: pgdata_dir_version
 
-      - name: "Initialize PostgreSQL"
-        shell: "/usr/pgsql-15/bin/postgresql-15-setup initdb"
-        when: not postgres_data.stat.exists
+      - name: Ensure PostgreSQL database is initialized.
+        command: "{{ postgresql_bin_path }}/initdb -D {{ postgresql_data_dir }}"
+        when: not pgdata_dir_version.stat.exists
 
       
       - name: Enable postgres service
