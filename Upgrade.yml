@@ -145,7 +145,7 @@
           warn: false
 
       - name: ensure postgresql15-server
-        yum:
+        dnf:
           name: postgresql15-server
           state: present
 
@@ -167,7 +167,7 @@
           state: started
 
       - name: ensure apache is at the latest version
-        yum:
+        dnf:
           name: httpd
           state: latest
 
