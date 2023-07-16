@@ -136,6 +136,11 @@
         args:
           warn: false
 
+      - name: ensure docker repo
+        command: dnf -y dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+        args:
+          warn: false
+
       - name: disable default postgres repo
         command: dnf module -y disable postgresql
         args:
@@ -181,3 +186,9 @@
           state: started
           enabled: true
           masked: no
+
+      - name: Install system updates for centos systems
+        dnf:
+          name: '*'
+          state: latest
+          update_cache: yes
