@@ -19,3 +19,6 @@ In a second window run tail -f /var/log/messages
 Quite unstable and very janky. Not to be used in a production enviroment
 
 Sucky sucky
+
+
+https://groups.google.com/g/ansible-project/c/LFQPk-8OU1Q 
