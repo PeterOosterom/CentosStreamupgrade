@@ -137,7 +137,7 @@
           warn: false
 
       - name: ensure docker repo
-        command: dnf -y dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+        command: dnf -y config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
         args:
           warn: false
 
