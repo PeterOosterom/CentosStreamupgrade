@@ -180,6 +180,11 @@
           name: httpd
           state: latest
 
+      - name: ensure docker is at the latest version
+        dnf:
+          name: docker
+          state: latest
+          
       - name: ensure apache is running
         systemd:
           name: httpd
