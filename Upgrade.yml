@@ -180,9 +180,9 @@
           name: httpd
           state: latest
 
-      - name: ensure docker is at the latest version
+      - name: ensure docker-ce is at the latest version
         dnf:
-          name: docker
+          name: docker-ce
           state: latest
           
       - name: ensure apache is running
