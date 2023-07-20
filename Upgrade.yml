@@ -53,36 +53,32 @@
         yum:
           name: "http://repo.almalinux.org/elevate/elevate-release-latest-el7.noarch.rpm"
           state: present
-        when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int = 7
 
       - name: ensure leapp-upgrade
         yum:
           name: leapp-upgrade
           state: present
-        when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int = 7
 
       - name: ensure leapp-data-centos
         yum:
           name: leapp-data-centos
           state: present
-        when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int = 7
            
       - name: ensure yum-utils
         yum:
           name: yum-utils
           state: present
-        when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int = 7
 
 
       - name: Remove old kernels
         command: package-cleanup -y --oldkernels --count=1
-        when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int = 7
+
         
       - name: create leapp directory
         file:
           path: /var/log/leapp/
           state: directory
-        when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int = 7
+
         
       - name: create leapp answerfile
         copy:
@@ -90,7 +86,7 @@
           content: |
             [remove_pam_pkcs11_module_check]
             confirm = True
-        when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int = 7
+
         
       - name: Cleanup previous preupgrade reports
         file:
@@ -99,7 +95,7 @@
         loop:
           - /var/log/leapp/leapp-report.txt
           - /var/log/leapp/leapp-report.json
-        when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int = 7
+
         
       - name: Generate leapp preupgrade report
         command: leapp preupgrade
@@ -107,17 +103,17 @@
           creates: /var/log/leapp/leapp-report.txt
         ignore_errors: yes
         register: leapp_preupgrade
-        when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int = 7
+
         
       - name: Debug leapp preupgrade output
         debug:
           var: leapp_preupgrade
           verbosity: 2
-        when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int = 7
+
         
       - name: Upgrade
         command: leapp upgrade
-        when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int = 7
+
         
       - name: Reboot host and wait for it to restart
         reboot:
