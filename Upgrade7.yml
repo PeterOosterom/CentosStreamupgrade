@@ -201,14 +201,6 @@
         command: "/usr/pgsql-15/bin/postgresql-15-setup initdb"
         when: not postgres.stat.exists
 
-
-      - name: Enable postgres service
-        systemd:
-          name: postgresql-15.service
-          enabled: true
-          masked: no
-          state: started
-
       - name: ensure apache is at the latest version
         dnf:
           name: httpd
