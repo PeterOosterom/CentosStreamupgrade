@@ -218,6 +218,14 @@
           enabled: true
           masked: no
 
+   
+      - name: Enable postgres service
+        systemd:
+          name: postgresql-15.service
+          enabled: true
+          masked: no
+          state: started
+          
       - name: Install system updates for centos systems
         dnf:
           name: '*'
@@ -244,18 +252,6 @@
         args:
           warn: false
 
-  - name: Enable Potgres
-    hosts: test
-    become: yes
-    become_user: root
-    tasks:
-      
-      - name: Enable postgres service
-        systemd:
-          name: postgresql-15.service
-          enabled: true
-          masked: no
-          state: started
 
           
 
