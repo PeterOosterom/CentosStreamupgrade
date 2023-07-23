@@ -133,6 +133,11 @@
       ansible_python_interpreter: /usr/bin/python3
     tasks:
 
+      - name: Remove Leapp deps
+        command: dnf remove -y yum-plugin-fastestmirror leapp elevate python2-leapp elevate-release leapp-data-centos btrfs-progs  --disableexcludes=all
+        args:
+          warn: false
+          
       - name: create python symlink
         command: ln -fs /usr/bin/python2 /usr/bin/python
         args:
