@@ -22,3 +22,13 @@
         command: rm -f /etc/yum.repos.d/docker-ce.repo /etc/yum.repos.d/pgdg-redhat-all.repo
         args:
           warn: false
+          
+      - name: remove broken packages
+        dnf:
+          name: make-devel-1:4.2.1-11.el8.x86_64
+          state: absent
+
+      - name: update
+        command: dnf -y --releasever=9-stream --allowerasing --setopt=deltarpm=false distro-sync
+        args:
+          warn: false
