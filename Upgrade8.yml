@@ -1,1 +1,7 @@
-
+---
+  - name: Centos pre-upgrade
+    hosts: test
+    become: yes
+    become_user: root
+    tasks:
+    
