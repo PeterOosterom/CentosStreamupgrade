@@ -85,7 +85,7 @@
 
       - name: dnf module reset 
         ansible.builtin.file:
-          state: present 
+          state: directory 
           path: /etc/dnf/modules.d
           
       - name: remove broken packages
