@@ -5,7 +5,24 @@
     become_user: root
     tasks:
 
+      - name: Check if base repo exists
+        stat:
+          path: "/etc/yum.repos.d/CentOS-Base.repo"
+        register: repo
 
+      - name: Copy centos base repo from Github
+        git:
+          repo: https://github.com/DigistateBV/centos7-repo.git
+          dest: /root/repo
+          clone: yes
+          update: yes
+        when: not repo.stat.exists
+
+      - name: Ensure base repo
+        command: cp /root/repo/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
+        args:
+          warn: false
+        when: not repo.stat.exists
 #Update apache en centos zodat alle servers dezelfde versie hebben
 
       - name: ensure apache is at the latest version
