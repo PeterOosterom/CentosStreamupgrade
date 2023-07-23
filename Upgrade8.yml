@@ -32,3 +32,43 @@
         command: dnf -y --releasever=9-stream --allowerasing --setopt=deltarpm=false distro-sync
         args:
           warn: false
+
+      - name: Rebuild rpm DB
+        command: rpmdb --rebuilddb
+        args:
+          warn: false
+
+      - name: dnf clean packages
+        command: dnf clean packages
+        args:
+          warn: false
+
+      - name: Install system updates for centos systems
+        yum:
+          name: '*'
+          state: latest
+          update_cache: yes
+
+      - name: groupupdate
+        command: dnf -y groupupdate "Core" "Minimal Install"
+        args:
+          warn: false
+          
+      - name: Remove rescue kernel
+        command: rm -f /boot/vmlinuz-0-rescue-b2a198ecbfdd451cb905f76f825af01e /boot/initramfs-0-rescue-b2a198ecbfdd451cb905f76f825af01e.img /boot/loader/entries/b2a198ecbfdd451cb905f76f825af01e-0-rescue.conf
+        args:
+          warn: false
+
+      - name: replace rescue kernel
+        command: /usr/lib/kernel/install.d/51-dracut-rescue.install add $(uname -r) /boot /boot/vmlinuz-$(uname -r)
+        args:
+          warn: false
+
+      - name: Reboot host and wait for it to restart
+        reboot:
+          msg: "Reboot initiated by Ansible"
+          connect_timeout: 5
+          reboot_timeout: 600
+          pre_reboot_delay: 0
+          post_reboot_delay: 30
+          test_command: whoami
