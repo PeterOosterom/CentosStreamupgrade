@@ -4,7 +4,12 @@
     become: yes
     become_user: root
     tasks:
-
+    
+      - name: ensure git 
+        yum:
+          name: git
+          state: latest
+          
       - name: Check if base repo exists
         stat:
           path: "/etc/yum.repos.d/CentOS-Base.repo"
