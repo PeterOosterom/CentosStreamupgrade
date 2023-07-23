@@ -156,7 +156,7 @@
     tasks:
 
       - name: Remove Leapp deps
-        command: dnf remove -y yum-plugin-fastestmirror leapp elevate python2-leapp elevate-release leapp-data-centos btrfs-progs  --disableexcludes=all
+        command: dnf remove -y yum-plugin-fastestmirror leapp elevate python2-leapp elevate-release leapp-data-centos btrfs-progs leapp-repository-deps-el8 --disableexcludes=all
         args:
           warn: false
           
