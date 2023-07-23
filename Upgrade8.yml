@@ -79,9 +79,14 @@
           warn: false
 
       - name: dnf module reset 
-        command: dnf module reset -y all
-        args:
-          warn: false
+        ansible.builtin.file:
+          state: absent 
+          path: /etc/dnf/modules.d
+
+      - name: dnf module reset 
+        ansible.builtin.file:
+          state: present 
+          path: /etc/dnf/modules.d
           
       - name: remove broken packages
         dnf:
