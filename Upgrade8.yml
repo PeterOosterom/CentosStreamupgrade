@@ -4,4 +4,28 @@
     become: yes
     become_user: root
     tasks:
-    
+
+      - name: update
+        command: dnf update -y --allowerasing
+        args:
+          warn: false
+          
+      - name: ensure Centos 9 repos
+        yum:
+          name: "http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-repos-9.0-18.el9.noarch.rpm"
+          state: present
+
+      - name: ensure Centos 9 repos
+        yum:
+          name: "http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-release-9.0-18.el9.noarch.rpm"
+          state: present
+
+      - name: ensure Centos 9 repo keys
+        yum:
+          name: "http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-9.0-18.el9.noarch.rpm"
+          state: present
+
+      - name: remove old repos
+        command: rm -f /etc/yum.repos.d/docker-ce.repo /etc/yum.repos.d/pgdg-redhat-all.repo
+        args:
+          warn: false
