@@ -74,7 +74,7 @@
           test_command: whoami
 
       - name: Remove old kernels
-        command: dnf remove $(dnf repoquery --installonly --latest-limit=-2) 
+        command: dnf remove "$(dnf repoquery --installonly --latest-limit=-2)" 
         args:
           warn: false
 
