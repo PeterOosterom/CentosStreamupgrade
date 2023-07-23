@@ -155,7 +155,14 @@
           state: started
           enabled: true
           masked: no
-
+   
+      - name: Enable postgres service
+        systemd:
+          name: postgresql-15.service
+          enabled: true
+          masked: no
+          state: started
+          
       - name: upgrade 
         command: dnf upgrade -y --allowerasing
         args:
