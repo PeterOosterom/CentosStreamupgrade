@@ -74,7 +74,7 @@
           test_command: whoami
 
       - name: Remove old kernels
-        command: dnf remove "$(dnf repoquery --installonly --latest-limit=-2)" 
+        command: dnf remove -y kernel-core-4.18.0-500.el8.x86_64
         args:
           warn: false
 
