@@ -85,8 +85,7 @@ systemctl enable --now postgresql-15
 dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
 dnf upgrade -y
 
-om resten van dat tooltje te verwijderen moet je eerst ff in /etc/dnf/dnf.conf alles weghalen bij exclude.
-dnf remove -y yum-plugin-fastestmirror leapp elevate python2-leapp elevate-release leapp-data-centos btrfs-progs  
+dnf remove -y yum-plugin-fastestmirror leapp elevate python2-leapp elevate-release leapp-data-centos btrfs-progs  --disableexcludes=all
 
 psql -c "ALTER DATABASE postgres REFRESH COLLATION VERSION"
 
