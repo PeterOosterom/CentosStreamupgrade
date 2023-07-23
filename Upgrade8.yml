@@ -88,7 +88,7 @@
           state: directory 
           path: /etc/dnf/modules.d
           
-      - name: remove broken packages
+      - name: ensure wget
         dnf:
           name: wget
           state: latest
