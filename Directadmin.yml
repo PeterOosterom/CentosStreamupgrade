@@ -275,6 +275,12 @@
         args:
           warn: false
 
+      - name: rebuild directadmin 
+        command: /usr/local/directadmin/custombuild/build update
+        args:
+          warn: false
 
-
-          
+      - name: rebuild directadmin 
+        command: /usr/local/directadmin/custombuild/build all d
+        args:
+          warn: false          
