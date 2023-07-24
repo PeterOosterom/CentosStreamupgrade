@@ -29,7 +29,7 @@
           warn: false
         when: not repo.stat.exists
 
-- name: Install system updates for centos systems
+      - name: Install system updates for centos systems
         yum:
           name: '*'
           state: latest
