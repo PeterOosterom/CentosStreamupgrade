@@ -1,5 +1,10 @@
 # CentosStreamupgrade
 
+cd /usr/local/directadmin/custombuild
+./build update
+./build all d
+
+
 
 
 # Warning
