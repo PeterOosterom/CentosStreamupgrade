@@ -5,7 +5,9 @@ cd /usr/local/directadmin/custombuild
 ./build all d
 
 
+# Directadmin
 
+Only works with php 8.1 and up
 
 # Warning
 
