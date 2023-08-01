@@ -19,5 +19,6 @@ Quite unstable and very janky. Not to be used in a production enviroment
 
 Sucky sucky
 
+leaves a lot of old centos 8 packages
 
 https://groups.google.com/g/ansible-project/c/LFQPk-8OU1Q 
